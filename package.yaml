@@ -1,0 +1,55 @@
+name:                derive-is-data-con
+version:             0.1.0.0
+github:              "HaskellZhangSong/derive-is-data-con"
+license:             BSD-3-Clause
+author:              "Zhang Song"
+maintainer:          "Haskell.Zhang.Song `at` hotmail.com"
+copyright:           "2025 Zhang Song"
+
+extra-source-files:
+- README.md
+- CHANGELOG.md
+
+# Metadata used when publishing your package
+synopsis:            This package generates data constructor predicate functions
+category:            Development
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/HaskellZhangSong/derive-is-data-con#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+
+ghc-options:
+- -Wall
+- -Wcompat
+- -Widentities
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wmissing-export-lists
+- -Wmissing-home-modules
+- -Wpartial-fields
+- -Wredundant-constraints
+
+library:
+  source-dirs: src
+  dependencies:
+    - template-haskell
+  exposed-modules:
+    Data.Derive.IsDataCon
+
+tests:
+  derive-is-data-con-test:
+    main:                Spec.hs
+    source-dirs:         test
+    exposed-modules:
+      Cases
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - HUnit
+    - derive-is-data-con
