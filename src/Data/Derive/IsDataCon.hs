@@ -1,5 +1,5 @@
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE TemplateHaskell #-}
-
 module Data.Derive.IsDataCon (
     derive_is
     ) 
@@ -15,7 +15,11 @@ nameToFunc :: ConName -> Int -> Dec
 nameToFunc name numOfTyArg = FunD fname [isClause, defaultClause]
   where
     fname = mkName $ "is" ++ ((if (isNameOp name) then (infixToStringName . mkName) else id) $ nameBase name)
+#if __GLASGOW_HASKELL__ >= 902
     isClause = Clause [ConP name [] (replicate numOfTyArg WildP)] (NormalB (ConE 'True)) []
+#else
+    isClause = Clause [ConP name  (replicate numOfTyArg WildP)] (NormalB (ConE 'True)) []
+#endif
     defaultClause = Clause [WildP] (NormalB (ConE 'False)) []
 
 infixToStringName :: Name -> String

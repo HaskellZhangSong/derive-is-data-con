@@ -1,4 +1,5 @@
 .stack-work/
-stack.yaml.lock
+*.lock
+dist-newstyle
 derive-is-data-con.cabal
 *~
